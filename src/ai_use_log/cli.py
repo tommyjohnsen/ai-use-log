@@ -10,6 +10,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any, Sequence
 
+from .export import DEFAULT_TITLE, render_markdown
 from .log import MalformedLineError, append_entry, read_entries
 from .schema import SchemaError, load_schema, validate_entry
 
@@ -46,6 +47,9 @@ def _parser() -> argparse.ArgumentParser:
     listing = commands.add_parser("list", parents=[command_options])
     listing.add_argument("--since")
     listing.add_argument("--task")
+    export = commands.add_parser("export", parents=[command_options])
+    export.add_argument("--out")
+    export.add_argument("--title", default=DEFAULT_TITLE)
     commands.add_parser("schema", parents=[command_options])
     return parser
 
@@ -102,6 +106,30 @@ def main(argv: Sequence[str] | None = None) -> int:
             print(f"ail: cannot append log: {exc}", file=sys.stderr)
             return 2
         print(json.dumps(entry, sort_keys=True))
+        return 0
+    if args.command == "export":
+        entries: list[dict[str, Any]] = []
+        try:
+            for item in read_entries(args.log):
+                if isinstance(item, MalformedLineError):
+                    print(f"ail: malformed log {item}", file=sys.stderr)
+                    return 2
+                entries.append(item)
+        except OSError as exc:
+            print(f"ail: cannot read log: {exc}", file=sys.stderr)
+            return 2
+        markdown = render_markdown(entries, schema, args.title)
+        if args.out is None:
+            print(markdown, end="")
+            return 0
+        if Path(args.out).absolute() == Path(args.log).absolute():
+            print("ail: export output must differ from the log", file=sys.stderr)
+            return 2
+        try:
+            Path(args.out).write_text(markdown, encoding="utf-8")
+        except OSError as exc:
+            print(f"ail: cannot write export: {exc}", file=sys.stderr)
+            return 2
         return 0
     try:
         since = _parse_since(args.since)
