@@ -1,3 +1,9 @@
+<!--
+PROVENANCE (mirror of .provenance/ledger.jsonl; ledger wins)
+written-by: unknown (pre-provenance) | 2026-10-16 | 8f848d5
+modified-by: codex/gpt-5.6-sol | 2026-10-26 | pending | provenance block added
+END PROVENANCE
+-->
 # ai-use-log: spec
 
 Stdlib-only Python CLI that keeps an append-only JSONL log of AI tool use while producing a document, and exports a Markdown disclosure appendix (Pandoc-friendly).

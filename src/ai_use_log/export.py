@@ -1,3 +1,7 @@
+# PROVENANCE (mirror of .provenance/ledger.jsonl; ledger wins)
+# written-by: unknown (pre-provenance) | 2026-10-16 | 1b4c1e3
+# modified-by: codex/gpt-5.6-sol | 2026-10-26 | pending | provenance block added
+# END PROVENANCE
 """Deterministic Markdown disclosure export."""
 
 from __future__ import annotations

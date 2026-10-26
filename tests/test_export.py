@@ -1,4 +1,9 @@
+# PROVENANCE (mirror of .provenance/ledger.jsonl; ledger wins)
+# written-by: unknown (pre-provenance) | 2026-10-16 | 1b4c1e3
+# modified-by: codex/gpt-5.6-sol | 2026-10-26 | pending | added linked-output regression tests; provenance block added
+# END PROVENANCE
 import json
+import os
 from pathlib import Path
 
 from ai_use_log.cli import main
@@ -48,3 +53,27 @@ def test_export_writes_file_and_rejects_malformed_log(tmp_path, capsys):
     path.write_text("not-json\n", encoding="utf-8")
     assert main(["export", "--log", str(path), "--out", str(output)]) == 2
     assert "line 1" in capsys.readouterr().err
+
+
+def test_export_refuses_symlink_to_log_without_truncating_it(tmp_path, capsys):
+    path = tmp_path / "uses.jsonl"
+    output = tmp_path / "appendix.md"
+    original = '{"tool":"Example Tool"}\n'
+    path.write_text(original, encoding="utf-8")
+    output.symlink_to(path)
+
+    assert main(["export", "--log", str(path), "--out", str(output)]) == 2
+    assert path.read_text(encoding="utf-8") == original
+    assert "output must differ" in capsys.readouterr().err
+
+
+def test_export_refuses_hard_link_to_log_without_truncating_it(tmp_path, capsys):
+    path = tmp_path / "uses.jsonl"
+    output = tmp_path / "appendix.md"
+    original = '{"tool":"Example Tool"}\n'
+    path.write_text(original, encoding="utf-8")
+    os.link(path, output)
+
+    assert main(["export", "--log", str(path), "--out", str(output)]) == 2
+    assert path.read_text(encoding="utf-8") == original
+    assert "output must differ" in capsys.readouterr().err

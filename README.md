@@ -1,3 +1,9 @@
+<!--
+PROVENANCE (mirror of .provenance/ledger.jsonl; ledger wins)
+written-by: unknown (pre-provenance) | 2026-10-16 | 1b4c1e3
+modified-by: codex/gpt-5.6-sol | 2026-10-26 | pending | provenance block added
+END PROVENANCE
+-->
 # ai-use-log
 
 `ai-use-log` is a small, local command-line tool for keeping an append-only JSON Lines record of AI-tool use and producing a deterministic Markdown disclosure appendix. It uses rule-based parsing and validation; it does not call a model API, capture prompts, or upload anything.

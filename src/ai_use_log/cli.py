@@ -1,3 +1,7 @@
+# PROVENANCE (mirror of .provenance/ledger.jsonl; ledger wins)
+# written-by: unknown (pre-provenance) | 2026-10-16 | cc1fd7b
+# modified-by: codex/gpt-5.6-sol | 2026-10-26 | pending | prevented linked exports from truncating the log; provenance block added
+# END PROVENANCE
 """Command-line interface."""
 
 from __future__ import annotations
@@ -77,6 +81,16 @@ def _entry_time(entry: dict[str, Any]) -> datetime | None:
         return None
 
 
+def _same_file(path: str | Path, log_path: str | Path) -> bool:
+    output = Path(path)
+    log = Path(log_path)
+    if output.resolve() == log.resolve():
+        return True
+    if output.exists():
+        return os.path.samefile(output, log)
+    return False
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
@@ -122,10 +136,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.out is None:
             print(markdown, end="")
             return 0
-        if Path(args.out).absolute() == Path(args.log).absolute():
-            print("ail: export output must differ from the log", file=sys.stderr)
-            return 2
         try:
+            if _same_file(args.out, args.log):
+                print("ail: export output must differ from the log", file=sys.stderr)
+                return 2
             Path(args.out).write_text(markdown, encoding="utf-8")
         except OSError as exc:
             print(f"ail: cannot write export: {exc}", file=sys.stderr)
