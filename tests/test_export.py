@@ -2,6 +2,7 @@
 # written-by: unknown (pre-provenance) | 2026-10-16 | 1b4c1e3
 # modified-by: codex/gpt-5.6-sol | 2026-10-26 | 4faff49 | added linked-output regression tests; provenance block added
 # reviewed-by: claude-code/claude-opus-5-5 | 2026-10-26 | APPROVE_WITH_NITS
+# reviewed-by: grok-build/grok-4.7 | 2026-10-26 | APPROVE
 # END PROVENANCE
 import json
 import os

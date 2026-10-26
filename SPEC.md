@@ -3,6 +3,7 @@ PROVENANCE (mirror of .provenance/ledger.jsonl; ledger wins)
 written-by: unknown (pre-provenance) | 2026-10-16 | 8f848d5
 modified-by: codex/gpt-5.6-sol | 2026-10-26 | 4faff49 | provenance block added
 reviewed-by: claude-code/claude-opus-5-5 | 2026-10-26 | APPROVE
+reviewed-by: grok-build/grok-4.7 | 2026-10-26 | APPROVE
 END PROVENANCE
 -->
 # ai-use-log: spec

@@ -6,27 +6,27 @@ Each ledger line is one JSON object with `path`, `blob`, `event` (`written` or `
 
 `blob` is the git blob SHA-1 of the file after removing its PROVENANCE header block: the lines from the `PROVENANCE` line through the `END PROVENANCE` line inclusive, plus a directly enclosing `<!--` / `-->` line pair. A review applies only while the file's current `blob` equals the reviewed one; any content change makes it stale. A release needs current reviews from claude-code and grok-build; an author never reviews its own work.
 
-Files tracked: 20 (excluding this summary and `.provenance/`). Inline headers: 16. Ledger-only: 4. Written entries current: 20/20. Current reviews: claude-code 20, grok-build 0. Current REJECTs: 0.
+Files tracked: 20 (excluding this summary and `.provenance/`). Inline headers: 16. Ledger-only: 4. Written entries current: 20/20. Current reviews: claude-code 20, grok-build 20. Current REJECTs: 0.
 
 | path | header | written-by (current content) | claude-code | grok-build |
 |---|---|---|---|---|
-| `.github/workflows/test.yml` | inline | unknown (pre-provenance) | APPROVE | - |
-| `.gitignore` | inline | unknown (pre-provenance) | APPROVE | - |
-| `LICENSE` | ledger | unknown (pre-provenance) | APPROVE | - |
-| `NOTICE` | ledger | unknown (pre-provenance) | APPROVE | - |
-| `README.md` | inline | unknown (pre-provenance) | APPROVE | - |
-| `SPEC.md` | inline | unknown (pre-provenance) | APPROVE | - |
-| `pyproject.toml` | inline | unknown (pre-provenance) | APPROVE | - |
-| `src/ai_use_log/__init__.py` | inline | unknown (pre-provenance) | APPROVE | - |
-| `src/ai_use_log/__main__.py` | inline | unknown (pre-provenance) | APPROVE | - |
-| `src/ai_use_log/cli.py` | inline | codex/gpt-5.6-sol | APPROVE_WITH_NITS | - |
-| `src/ai_use_log/default_schema.json` | ledger | unknown (pre-provenance) | APPROVE | - |
-| `src/ai_use_log/export.py` | inline | unknown (pre-provenance) | APPROVE | - |
-| `src/ai_use_log/log.py` | inline | unknown (pre-provenance) | APPROVE | - |
-| `src/ai_use_log/schema.py` | inline | unknown (pre-provenance) | APPROVE | - |
-| `tests/fixtures/export.md` | ledger | unknown (pre-provenance) | APPROVE | - |
-| `tests/test_cli.py` | inline | unknown (pre-provenance) | APPROVE | - |
-| `tests/test_export.py` | inline | codex/gpt-5.6-sol | APPROVE_WITH_NITS | - |
-| `tests/test_log.py` | inline | unknown (pre-provenance) | APPROVE | - |
-| `tests/test_options.py` | inline | unknown (pre-provenance) | APPROVE | - |
-| `tests/test_schema.py` | inline | unknown (pre-provenance) | APPROVE | - |
+| `.github/workflows/test.yml` | inline | unknown (pre-provenance) | APPROVE | APPROVE |
+| `.gitignore` | inline | unknown (pre-provenance) | APPROVE | APPROVE |
+| `LICENSE` | ledger | unknown (pre-provenance) | APPROVE | APPROVE |
+| `NOTICE` | ledger | unknown (pre-provenance) | APPROVE | APPROVE |
+| `README.md` | inline | unknown (pre-provenance) | APPROVE | APPROVE |
+| `SPEC.md` | inline | unknown (pre-provenance) | APPROVE | APPROVE |
+| `pyproject.toml` | inline | unknown (pre-provenance) | APPROVE | APPROVE |
+| `src/ai_use_log/__init__.py` | inline | unknown (pre-provenance) | APPROVE | APPROVE |
+| `src/ai_use_log/__main__.py` | inline | unknown (pre-provenance) | APPROVE | APPROVE |
+| `src/ai_use_log/cli.py` | inline | codex/gpt-5.6-sol | APPROVE_WITH_NITS | APPROVE_WITH_NITS |
+| `src/ai_use_log/default_schema.json` | ledger | unknown (pre-provenance) | APPROVE | APPROVE |
+| `src/ai_use_log/export.py` | inline | unknown (pre-provenance) | APPROVE | APPROVE |
+| `src/ai_use_log/log.py` | inline | unknown (pre-provenance) | APPROVE | APPROVE |
+| `src/ai_use_log/schema.py` | inline | unknown (pre-provenance) | APPROVE | APPROVE |
+| `tests/fixtures/export.md` | ledger | unknown (pre-provenance) | APPROVE | APPROVE |
+| `tests/test_cli.py` | inline | unknown (pre-provenance) | APPROVE | APPROVE |
+| `tests/test_export.py` | inline | codex/gpt-5.6-sol | APPROVE_WITH_NITS | APPROVE |
+| `tests/test_log.py` | inline | unknown (pre-provenance) | APPROVE | APPROVE |
+| `tests/test_options.py` | inline | unknown (pre-provenance) | APPROVE | APPROVE |
+| `tests/test_schema.py` | inline | unknown (pre-provenance) | APPROVE | APPROVE |
